@@ -8,11 +8,11 @@ const recipes = await getCollection('recipes');
 <RecipePage
 	page={{
 		currentPage: 1,
-		data: recipes.slice(0, 11),
+		data: recipes.slice(0, 12),
 		total: recipes.length,
 		size: 12,
-		start: 1,
-		end: recipes.length,
+		start: 0,
+		end: 11,
 		lastPage: Math.ceil(recipes.length / 12),
 		url: {
 			next: '/house-kitchen/recipes/page/2',
