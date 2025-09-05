@@ -1,0 +1,25 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import { getCollection } from 'astro:content';
+import Pagination from './Pagination.astro';
+import Layout from '../layouts/Layout.astro';
+import Card from './Card.astro';
+interface Props {
+	page: Page;
+}
+
+// All paginated data is passed on the "page" prop
+const { page } = Astro.props;
+---
+
+<Layout>
+	<!-- Display the current page number. `Astro.params.page` can also be used! -->
+	<p class="mb-3">
+		Showing {page.start + 1}{'\u2013'}{page.end + 1} of {page.total} recipes
+	</p>
+
+	<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+		{page.data.map(({ data }) => <Card recipe={data} />)}
+	</div>
+	<Pagination page={page} />
+</Layout>

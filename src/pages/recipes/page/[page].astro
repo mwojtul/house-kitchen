@@ -1,0 +1,19 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import Pagination from '../../../components/Pagination.astro';
+import Layout from '../../../layouts/Layout.astro';
+import Card from '../../../components/Card.astro';
+import RecipePage from '../../../components/RecipePage.astro';
+export const getStaticPaths = (async ({ paginate }) => {
+	const recipes = await getCollection('recipes');
+	console.log(recipes);
+	// Generate pages from our array of astronauts, with 2 to a page
+	return paginate(recipes, { pageSize: 12 });
+}) satisfies GetStaticPaths;
+
+// All paginated data is passed on the "page" prop
+const { page } = Astro.props;
+---
+
+<RecipePage page={page} />

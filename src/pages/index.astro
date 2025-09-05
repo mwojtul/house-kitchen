@@ -1,11 +1,28 @@
 ---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import RecipePage from '../components/RecipePage.astro';
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const recipes = await getCollection('recipes');
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<RecipePage
+	page={{
+		currentPage: 1,
+		data: recipes.slice(0, 11),
+		total: recipes.length,
+		size: 12,
+		start: 1,
+		end: recipes.length,
+		lastPage: Math.ceil(recipes.length / 12),
+		url: {
+			next: '/recipes/page/2',
+			first: undefined,
+			current: '/recipes/page/1',
+			last: `/recipes/page/${Math.ceil(recipes.length / 12)}`,
+			prev: undefined,
+		},
+	}}
+/>

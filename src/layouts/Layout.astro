@@ -1,3 +1,7 @@
+---
+import '../styles/global.css';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -5,10 +9,30 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>House Kitchen</title>
 	</head>
-	<body>
-		<slot />
+	<body class="bg-white dark:bg-zinc-900 dark:text-stone-300">
+		<div
+			class="flex items-center justify-center py-4 bg-white dark:bg-zinc-900 px-6"
+		>
+			<div class="w-7xl">
+				<a href="/" class="text-3xl font-semibold text-blue-500"
+					>🍳 House Kitchen</a
+				>
+			</div>
+		</div>
+		<div class="flex items-center justify-center mt-4 px-6">
+			<div class="w-7xl pt-3 pb-10">
+				<slot />
+			</div>
+		</div>
+		<div class="flex items-center justify-center">
+			<div
+				class="w-7xl text-center text-sm text-stone-500 dark:border-t-zinc-700 border-t-gray-200 border-t py-3"
+			>
+				© {new Date().getFullYear()} House Kitchen
+			</div>
+		</div>
 	</body>
 </html>
 
