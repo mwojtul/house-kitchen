@@ -1,9 +1,6 @@
 ---
-import type { GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import RecipePage from '../components/RecipePage.astro';
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
 
 const recipes = await getCollection('recipes');
 ---
@@ -18,10 +15,10 @@ const recipes = await getCollection('recipes');
 		end: recipes.length,
 		lastPage: Math.ceil(recipes.length / 12),
 		url: {
-			next: '/recipes/page/2',
+			next: '/house-kitchen/recipes/page/2',
 			first: undefined,
-			current: '/recipes/page/1',
-			last: `/recipes/page/${Math.ceil(recipes.length / 12)}`,
+			current: '/house-kitchen/recipes/page/1',
+			last: `/house-kitchen/recipes/page/${Math.ceil(recipes.length / 12)}`,
 			prev: undefined,
 		},
 	}}
