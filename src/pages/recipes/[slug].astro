@@ -17,6 +17,22 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 	'/src/assets/recipe-images/*.{jpeg,jpg,png,gif}',
 );
 const imagePath = `/src/assets/recipe-images/${recipe.data.image}`;
+function formatDate(iso: string) {
+	const dt = new Date(iso);
+	const options = {
+		month: 'short', // "Feb"
+		day: 'numeric', // "6"
+		year: 'numeric', // "2025"
+		hour: 'numeric',
+		minute: '2-digit',
+		hour12: true,
+	} as const;
+	// Example: "Feb 6, 2025, 3:25 PM"
+	const formatted = dt.toLocaleString('en-US', options);
+	return formatted;
+	// Replace comma with @ for your style
+	return formatted.replace(',', ' @').replace('PM', 'pm').replace('AM', 'am');
+}
 ---
 
 <Layout>
@@ -30,6 +46,7 @@ const imagePath = `/src/assets/recipe-images/${recipe.data.image}`;
 			<Image class="w-full" src={images[imagePath]()} alt="" />
 		</div>
 		<h1 class="text-3xl font-semibold mt-8">{recipe.data.name}</h1>
+		<p>{formatDate(recipe.data.datePublished)}</p>
 		<p class="mt-8">{recipe.data.description}</p>
 		<div class="mt-8 flex gap-x-3">
 			<span class="badge"
